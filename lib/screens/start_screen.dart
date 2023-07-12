@@ -15,6 +15,25 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 10,
+        centerTitle: false,
+        leadingWidth: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Water Counter",
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            Text(
+              "${DateTime.now().hour}:${DateTime.now().minute}",
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ],
+        ),
+        // actions: [],
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -46,7 +65,7 @@ class _StartScreenState extends State<StartScreen> {
       child: 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+            children: [
             _percentage(),
             _smallDivider(),
             _hydration(),
@@ -57,9 +76,9 @@ class _StartScreenState extends State<StartScreen> {
 
   Widget _percentage(){
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          height: 60,
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -96,7 +115,7 @@ class _StartScreenState extends State<StartScreen> {
 
   Widget _hydration(){
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         const IntervalProgressBar(),
         // _intervalBar(),
@@ -118,13 +137,25 @@ class _StartScreenState extends State<StartScreen> {
 
   Widget _buttonReg(){
     return Center(
-          child: ElevatedButton(
-              onPressed: () {},
-              child: 
-                const Text(
-                  'Registrar',
-                )
-            )
-          );
+      child: ConstrainedBox(
+        constraints: const BoxConstraints.tightFor(
+          width: 100,
+          height: 30,
+        ),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+            ),
+            backgroundColor: const Color.fromARGB(255, 31, 15, 175),
+          ),
+            onPressed: () {},
+            child: 
+              const Text(
+                'Registrar',
+              )
+          ),
+      )
+      );
   }
 }
