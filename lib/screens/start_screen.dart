@@ -113,7 +113,7 @@ class _StartScreenState extends State<StartScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const IntervalProgressBar(),
+        const IntervalProgressBar(value: 0),
         // _intervalBar(),
         Text(
           'Hidratación',
