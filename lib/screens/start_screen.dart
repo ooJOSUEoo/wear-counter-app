@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wear_counter_app_1/assets/interval_progress_bar.dart';
+import 'package:intl/intl.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -16,29 +17,24 @@ class _StartScreenState extends State<StartScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 10,
-        centerTitle: false,
-        leadingWidth: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
+        toolbarHeight: 16,
+        leadingWidth: 100,
+        leading: Text(
               "Water Counter",
               style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            Text(
-              "${DateTime.now().hour}:${DateTime.now().minute}",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
         ),
+        actions: [
+          _hour()
+        ],
         // actions: [],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _totalMl(),
+          _verticalGap(),
           _indicators(),
+          _verticalGap(),
           _buttonReg()
         ],
       ),
@@ -133,6 +129,19 @@ class _StartScreenState extends State<StartScreen> {
             '1.0',
             style: Theme.of(context).textTheme.headlineSmall,
           );
+  }
+
+  Widget _hour() {
+    return Text(
+      DateFormat.Hm().format(DateTime.now()),
+      style: Theme.of(context).textTheme.bodySmall,
+    );
+  }
+
+  Widget _verticalGap() {
+    return const SizedBox(
+      height: 5.5,
+    );
   }
 
   Widget _buttonReg(){
