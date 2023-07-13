@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wear_counter_app_1/assets/interval_progress_bar.dart';
 import 'package:intl/intl.dart';
+import 'package:wear_counter_app_1/screens/drink_screen.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -113,7 +114,7 @@ class _StartScreenState extends State<StartScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const IntervalProgressBar(value: 0),
+        const IntervalProgressBar(value: 0 ),
         // _intervalBar(),
         Text(
           'Hidratación',
@@ -158,7 +159,12 @@ class _StartScreenState extends State<StartScreen> {
             ),
             backgroundColor: const Color.fromARGB(255, 31, 15, 175),
           ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DrinkScreen()),
+              );
+            },
             child: 
               const Text(
                 'Registrar',
