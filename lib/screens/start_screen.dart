@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:wear_counter_app_1/assets/interval_progress_bar.dart';
 import 'package:intl/intl.dart';
@@ -5,12 +7,15 @@ import 'package:wear_counter_app_1/screens/drink_screen.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
-
+  final int valueWater = 1750;
+  final int totalValue = 2550;
   @override
   State<StartScreen> createState() => _StartScreenState();
 }
 
 class _StartScreenState extends State<StartScreen> {
+  get valueWater => widget.valueWater;
+  get totalValue => widget.totalValue;
 
 
   @override
@@ -46,11 +51,11 @@ class _StartScreenState extends State<StartScreen> {
     return Column(
       children: [
         Text(
-          '0 ml',
+          valueWater.toString(),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         Text(
-          'Faltan 2001 ml',
+          'Faltan ${totalValue - valueWater} ml',
           style: Theme.of(context).textTheme.bodyMedium,
         )
       ],
@@ -79,14 +84,14 @@ class _StartScreenState extends State<StartScreen> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              const CircularProgressIndicator(
+              CircularProgressIndicator(
                 strokeWidth: 6,
-                value: .9,
-                color: Color.fromARGB(255, 106, 255, 7),
-                backgroundColor: Color.fromARGB(58, 88, 88, 88),    
+                value: valueWater * 100 / totalValue / 100,
+                color: const Color.fromARGB(255, 106, 255, 7),
+                backgroundColor: const Color.fromARGB(58, 88, 88, 88),    
               ),
               Text(
-                '90%',
+                '${valueWater * 100 ~/ totalValue}%',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
