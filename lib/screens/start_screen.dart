@@ -1,13 +1,14 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:wear_counter_app_1/assets/interval_progress_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:wear_counter_app_1/screens/drink_screen.dart';
+// import 'dart:async';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class StartScreen extends StatefulWidget {
-  const StartScreen({Key? key}) : super(key: key);
-  final int valueWater = 1750;
+  final double hidratacion;
+  final int valueWater;
+  const StartScreen({Key? key, required this.hidratacion, required this.valueWater}) : super(key: key);
   final int totalValue = 2550;
   @override
   State<StartScreen> createState() => _StartScreenState();
@@ -16,6 +17,7 @@ class StartScreen extends StatefulWidget {
 class _StartScreenState extends State<StartScreen> {
   get valueWater => widget.valueWater;
   get totalValue => widget.totalValue;
+  get hidratacion => widget.hidratacion;
 
 
   @override
@@ -55,7 +57,7 @@ class _StartScreenState extends State<StartScreen> {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         Text(
-          'Faltan ${totalValue - valueWater} ml',
+          'Faltan ${totalValue - valueWater <= 0 ? 0 : totalValue - valueWater} ml',
           style: Theme.of(context).textTheme.bodyMedium,
         )
       ],
@@ -91,7 +93,7 @@ class _StartScreenState extends State<StartScreen> {
                 backgroundColor: const Color.fromARGB(58, 88, 88, 88),    
               ),
               Text(
-                '${valueWater * 100 ~/ totalValue}%',
+                '${valueWater * 100 ~/ totalValue >= 100 ? 100 : valueWater * 100 ~/ totalValue}%',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
@@ -119,7 +121,7 @@ class _StartScreenState extends State<StartScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const IntervalProgressBar(value: 0 ),
+        IntervalProgressBar(value: hidratacion),
         // _intervalBar(),
         Text(
           'Hidratación',
@@ -167,7 +169,7 @@ class _StartScreenState extends State<StartScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DrinkScreen()),
+                MaterialPageRoute(builder: (context) => DrinkScreen(hidratacion: hidratacion,valueWater: valueWater,)),
               );
             },
             child: 
